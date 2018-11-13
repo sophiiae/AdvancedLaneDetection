@@ -19,8 +19,8 @@ scaled_sobelx = np.uint8(255 * abs_sobelx/np.max(abs_sobelx))
 scaled_sobely = np.uint8(255 * abs_sobely/np.max(abs_sobely))
 
 # create threshold
-thresh_min = 30
-thresh_max = 150
+thresh_min = 20
+thresh_max = 100
 
 sxbinary = np.zeros_like(scaled_sobelx)
 sxbinary[(scaled_sobelx >= thresh_min) & (scaled_sobelx <= thresh_max)] = 1

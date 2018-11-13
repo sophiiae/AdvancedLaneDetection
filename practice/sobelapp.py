@@ -4,12 +4,12 @@ import numpy as np
 import cv2
 
 # apply sobel filter to the image
-def abs_sobel_thresh(img, orient, kernel_size, thresh_min, thresh_max):
+def abs_sobel_thresh(img, orient, thresh_min, thresh_max):
     gray = cv2.cvtColor(img, cv2.COLOR_RGB2GRAY)
 
     # calculate derivative in different directions
-    sobelx = cv2.Sobel(gray, cv2.CV_64F, 1, 0, ksize=kernel_size)
-    sobely = cv2.Sobel(gray, cv2.CV_64F, 0, 1, ksize=kernel_size)
+    sobelx = cv2.Sobel(gray, cv2.CV_64F, 1, 0)
+    sobely = cv2.Sobel(gray, cv2.CV_64F, 0, 1)
 
     # assgin derivate with parameter
     if (orient == 'x'):
@@ -28,10 +28,9 @@ def abs_sobel_thresh(img, orient, kernel_size, thresh_min, thresh_max):
 
 # define the inputs for the function
 im = mpimg.imread('images/signs.png')
-kernel_size = 9
-thresh_min = 30
+thresh_min = 20
 thresh_max = 100
-output = abs_sobel_thresh(im, 'xy', kernel_size, thresh_min, thresh_max)
+output = abs_sobel_thresh(im, 'xy', thresh_min, thresh_max)
 
 # plot the result
 fig = plt.figure
