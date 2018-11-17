@@ -22,7 +22,7 @@ def mag_thresh(img, kernel_size, thresh_min, thresh_max):
     return binary_output
 
 # define the inputs for the function
-im = mpimg.imread('images/signs.png')
+im = mpimg.imread('practice/images/signs.png')
 kernel_size = 9
 thresh_min = 30
 thresh_max = 100

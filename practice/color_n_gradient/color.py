@@ -3,7 +3,7 @@ import cv2
 import matplotlib.pyplot as plt
 import matplotlib.image as mpimg
 
-im = mpimg.imread('images/test6.jpg')
+im = mpimg.imread('practice/images/test6.jpg')
 # thresh = (180, 255)
 gray = cv2.cvtColor(im, cv2.COLOR_RGB2GRAY)
 # binary = np.zeros_like(gray)
@@ -42,10 +42,10 @@ plt.imshow(binary, cmap='gray')
 plt.title("b")
 
 plt.subplot(223)
-plt.imshow(h, cmap='gray')
-plt.title("h")
+plt.imshow(l, cmap='gray')
+plt.title("l")
 
 plt.subplot(224)
-plt.imshow(hi, cmap='gray')
-plt.title("hi")
+plt.imshow(h, cmap='gray')
+plt.title("h")
 plt.show()

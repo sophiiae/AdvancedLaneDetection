@@ -27,7 +27,7 @@ def abs_sobel_thresh(img, orient, thresh_min, thresh_max):
     return binary_output
 
 # define the inputs for the function
-im = mpimg.imread('images/signs.png')
+im = mpimg.imread('practice/images/signs.png')
 thresh_min = 20
 thresh_max = 100
 output = abs_sobel_thresh(im, 'xy', thresh_min, thresh_max)

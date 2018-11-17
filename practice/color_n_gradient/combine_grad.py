@@ -62,7 +62,7 @@ def dir_threshold(img, kernel=3, thresh=(0, np.pi/2)):
     dir_binary[(dir >= thresh[0]) & (dir <= thresh[1])] = 1
     return dir_binary
 
-image = mpimg.imread('images/signs.png')
+image = mpimg.imread('practice/images/signs.png')
 
 # Choose a Sobel kernel size
 ksize = 3 # Choose a larger odd number to smooth gradient measurements

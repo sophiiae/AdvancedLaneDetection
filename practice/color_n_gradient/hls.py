@@ -3,7 +3,7 @@ import cv2
 import matplotlib.pyplot as plt
 import matplotlib.image as mpimg
 
-im = mpimg.imread('images/test6.jpg')
+im = mpimg.imread('practice/images/test6.jpg')
 
 def hls_select(im, thresh=(0, 255)): 
     hls = cv2.cvtColor(im, cv2.COLOR_RGB2HLS)

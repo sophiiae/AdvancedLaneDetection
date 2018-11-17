@@ -3,7 +3,7 @@ import matplotlib.image as mpimg
 import numpy as np
 import cv2
 
-im = mpimg.imread('images/test3.jpg')
+im = mpimg.imread('practice/images/test3.jpg')
 gray = cv2.cvtColor(im, cv2.COLOR_RGB2GRAY)  #convert to grayscale
 
 # calculate derivative in the x & y directions

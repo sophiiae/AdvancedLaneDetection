@@ -3,7 +3,7 @@ import cv2
 import matplotlib.pyplot as plt
 import matplotlib.image as mpimg
 
-img = mpimg.imread('images/test5.jpg')
+img = mpimg.imread('practice/images/test5.jpg')
 
 # Convert to HLS color space and separate the S channel
 # Note: img is the undistorted image

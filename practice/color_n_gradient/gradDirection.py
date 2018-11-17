@@ -23,7 +23,7 @@ def dir_threshold(img, kernel_size, thresh):
     return binary_output
 
 # define the inputs for the function
-im = mpimg.imread('images/signs.png')
+im = mpimg.imread('practice/images/signs.png')
 kernel = 15
 thresh = (0.7, 1.3)
 output = dir_threshold(im, kernel, thresh)
