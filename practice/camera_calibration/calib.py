@@ -20,6 +20,8 @@ for fname in images:
     path = dir + fname                                          
     im = mpimg.imread(path)   
     gray = cv2.cvtColor(im, cv2.COLOR_RGB2GRAY) 
+
+    # find chessboard corners for (9 x 6 board)
     ret, corners = cv2.findChessboardCorners(gray, (9, 6), None)
 
     # if corners are found
@@ -27,11 +29,15 @@ for fname in images:
         imgpoints.append(corners)
         objpoints.append(objp)
 
+        # draw detected corners on an image
         im = cv2.drawChessboardCorners(im, (9, 6), corners, ret)
 
-ret, mtx, dist, rvecs, tvecs = cv2.calibrateCamera(objpoints, imgpoints, gray.shape[::-1], None, None)
+# camera calibration, get all parameters
+size = gray.shape[::-1]  # image size in pixel. alternative: colorIMG.shape[1::-1]
+ret, mtx, dist, rvecs, tvecs = cv2.calibrateCamera(objpoints, imgpoints, size, None, None)
 
 img = mpimg.imread('practice/checkerboard_images/calibration8.jpg')
+# undistort a test image
 dst = cv2.undistort(img, mtx, dist, None, mtx)
 
 plt.imshow(dst)
