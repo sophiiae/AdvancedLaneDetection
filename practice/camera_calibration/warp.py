@@ -8,7 +8,7 @@ im = mpimg.imread('practice/images/straight_lines1.jpg')
 
 # trapezoid points [ topright, botright, botleft, topleft]
 mask = [ [683, 447], [1037, 666], [270, 666], [596, 447]]
-dst = [[820, 0], [820, 666], [300, 666], [300,0]]
+dst = [[900, 0], [900, 666], [200, 666], [200,0]]
 
 def region(im, mask):
     # result = np.copy(im)
@@ -34,18 +34,19 @@ def warp(im, mask, dst):
 
     return warped
 
-def plot_func(im, result):
+def plot(im, name_im, result, name_result):
     f, (ax1, ax2) = plt.subplots(2, 1, figsize=(10, 20))
 
     ax1.imshow(im)
-    ax1.set_title('region Image')
+    ax1.set_title(name_im)
 
     ax2.imshow(result)
-    ax2.set_title('warped image')
+    ax2.set_title(name_result)
+    plt.show()
 
 result = warp(im, mask, dst)
 region_select = region(im, mask)
 warped_region = region(result, dst)
-plot_func(region_select, warped_region)
-plt.show()
+plot(region_select,"image", warped_region,"warped image")
+
 
