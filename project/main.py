@@ -5,6 +5,7 @@ import cv2
 from modules import warp
 from modules import line
 from modules import plot
+from modules import search
 
 im = mpimg.imread('project/images/road2/ROAD2_0001.png')
 gray = cv2.cvtColor(im, cv2.COLOR_RGB2GRAY)
@@ -17,7 +18,12 @@ sobel_l = line.sobel_thresh(l, 'x', (10, 30))
 # hist = line.hist(sobel_l)
 
 # leftx, lefty, rightx, righty, out = line.slidewins(sobel_l)
-out = line.fit_polynomial(sobel_l)
+out = search.search_poly(sobel_l)
+
+window_width = 100 
+window_height = 120 # Break image into 9 vertical layers since image height is 720
+margin = 200 # How much to slide left and right for searching
+# out = search.find_centroids(sobel_l, window_width, window_height, margin)
 
 # ---  plot images ---------------------------
 plot.plot1(out,"out", None)
