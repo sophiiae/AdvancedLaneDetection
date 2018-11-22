@@ -3,7 +3,6 @@ import matplotlib.image as mpimg
 import numpy as np
 import cv2
 
-
 # apply sobel filter to the image
 def dir_threshold(img, kernel_size, thresh):
     gray = cv2.cvtColor(img, cv2.COLOR_RGB2GRAY)

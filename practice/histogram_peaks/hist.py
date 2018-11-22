@@ -34,6 +34,7 @@ color_warp.plot(h, 'h channel', 'gray',
 # Assuming you have created a warped binary image called "sobel"
 # Take a histogram of the bottom half of the image
 histogram = np.sum(sobel[sobel.shape[0]//2:,:], axis=0)
+
 # Create an output image to draw on and visualize the result
 out_img = np.dstack((sobel, sobel, sobel))*255
 # Find the peak of the left and right halves of the histogram
