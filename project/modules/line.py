@@ -144,8 +144,8 @@ def fit_polynomial(binary_warped):
     leftx, lefty, rightx, righty, out_img = slidewins(binary_warped)
 
     ### TO-DO: Fit a second order polynomial to each using `np.polyfit` ###
-    left_fit = None
-    right_fit = None
+    left_fit = np.polyfit(lefty,leftx, 2)
+    right_fit = np.polyfit(righty, rightx, 2)
 
     # Generate x and y values for plotting
     ploty = np.linspace(0, binary_warped.shape[0]-1, binary_warped.shape[0])
@@ -158,7 +158,6 @@ def fit_polynomial(binary_warped):
         left_fitx = 1*ploty**2 + 1*ploty
         right_fitx = 1*ploty**2 + 1*ploty
 
-    ## Visualization ##
     # Colors in the left and right lane regions
     out_img[lefty, leftx] = [255, 0, 0]
     out_img[righty, rightx] = [0, 0, 255]

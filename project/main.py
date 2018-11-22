@@ -16,10 +16,11 @@ warped = warp.warp(im, mask, dst)
 sobel_l = line.sobel_thresh(l, 'x', (10, 30))
 # hist = line.hist(sobel_l)
 
-leftx, lefty, rightx, righty, out_img = line.slidewins(sobel_l)
+# leftx, lefty, rightx, righty, out = line.slidewins(sobel_l)
+out = line.fit_polynomial(sobel_l)
 
 # ---  plot images ---------------------------
-plot.plot1(out_img,"out", None)
+plot.plot1(out,"out", None)
 # plot.plot(hist)
 # plot.plot2([[im, 'image'], [warped, 'w']])
 # plot.plot4([[l, 'l'],
