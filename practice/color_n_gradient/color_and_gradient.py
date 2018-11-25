@@ -3,7 +3,7 @@ import cv2
 import matplotlib.pyplot as plt
 import matplotlib.image as mpimg
 
-image = mpimg.imread('practice/images/test5.jpg')
+image = mpimg.imread('project/images/test/ROAD2_0709.png')
 
 def hls(img):
     # Convert to HLS color space and separate the V channel
@@ -28,9 +28,9 @@ def gradient_th(img, th=(0, 255)):
 
 def color_th(img, th=(0, 255)):
     # Threshold color channel
-    s_binary = np.zeros_like(img)
-    s_binary[(img >= th[0]) & (img <= th[1])] = 1
-    return s_binary
+    binary = np.zeros_like(img)
+    binary[(img >= th[0]) & (img <= th[1])] = 1
+    return binary
 
 def pipeline(img, s_thresh=(170, 255), g_thresh=(20, 100)):
     img = np.copy(img)
@@ -39,14 +39,15 @@ def pipeline(img, s_thresh=(170, 255), g_thresh=(20, 100)):
     scaled_sobel = sobel(l) # apply sobel to channel image
     
     g_binary = gradient_th(scaled_sobel, g_thresh) # apply gradient threshold
-    s_binary = color_th(s, s_thresh) # apply color threshold
+    s_binary = color_th(l, s_thresh) # apply color threshold
 
     # Stack each channel
     color_binary = np.dstack((np.zeros_like(g_binary), g_binary, s_binary)) * 255
     combined_binary = np.zeros_like(g_binary)
     combined_binary[(s_binary == 1) | (g_binary == 1)] = 1
     
-    return [color_binary, combined_binary]
+    # return [color_binary, combined_binary]
+    return [g_binary, s_binary]
 
 def plot(im, name_im, result, name_result):
     f, (ax1, ax2) = plt.subplots(2, 1, figsize=(10, 20))
@@ -54,7 +55,7 @@ def plot(im, name_im, result, name_result):
     ax1.imshow(im,cmap='gray')
     ax1.set_title(name_im)
 
-    ax2.imshow(result)
+    ax2.imshow(result,cmap='gray')
     ax2.set_title(name_result)
     plt.show()
     
