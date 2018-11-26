@@ -36,10 +36,10 @@ def slidewins(binary, nwindows=14, margin=200, minpix=100):
         win_xright_high = rightx_current + margin
         
         # Draw the windows on the visualization image
-        # cv2.rectangle(out_img,(win_xleft_low,win_y_low),
-        # (win_xleft_high,win_y_high),(255,0,0), 4) 
-        # cv2.rectangle(out_img,(win_xright_low,win_y_low),
-        # (win_xright_high,win_y_high),(0,0,255), 4) 
+        cv2.rectangle(out_img,(win_xleft_low,win_y_low),
+        (win_xleft_high,win_y_high),(255,0,0), 4) 
+        cv2.rectangle(out_img,(win_xright_low,win_y_low),
+        (win_xright_high,win_y_high),(0,0,255), 4) 
 
         good_left_inds = ((nonzeroy >= win_y_low) & (nonzeroy < win_y_high) & 
         (nonzerox >= win_xleft_low) &  (nonzerox < win_xleft_high)).nonzero()[0]
