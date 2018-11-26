@@ -6,10 +6,11 @@ import glob
 import initialize as init
 import detection as dt
 import curvature as cur
+import draw
 
 dir = 'project/images/test_out/'
 input = glob.glob('project/images/test/*.png')
-images, binary_img, warped_images, peaks = init.find_lane(input)
+images, binary_img, warped_images, peaks, M = init.find_lane(input)
 
 im = images[0]
 bi = binary_img[0]
@@ -25,15 +26,22 @@ left_fitxx =[]
 right_fitxx = []
 left = []
 right = []
+left_win = []
+right_win = []
 
 for i in range(len(warped_images)):
-    im = warped_images[i]
+    warped = warped_images[i]
+    im = images[i]
     if i == 0: 
-        left_fit, right_fit, left_fitx, right_fitx, leftx, lefty, rightx, righty, ploty = dt.find_lane(im, peaks[i], [], [])
+        left_fit, right_fit, left_fitx, right_fitx, leftx, lefty, rightx, righty, ploty, leftw, rightw = dt.find_lane(warped, peaks[i], [], [])
     else:
-        left_fit, right_fit, left_fitx, right_fitx, leftx, lefty, rightx, righty, ploty = dt.find_lane(im, peaks[i], prev_left[i-1], prev_right[i-1])
+        left_fit, right_fit, left_fitx, right_fitx, leftx, lefty, rightx, righty, ploty, leftw, rightw = dt.find_lane(warped, peaks[i], prev_left[i-1], prev_right[i-1])
 
     lc, rc = dt.compute_curvature(left_fit, right_fit, left_fitx, right_fitx, ploty)
+    
+    out_img = draw.draw_lane(warped, left_fitx, right_fitx, leftw, rightw)
+    # region_out = draw.draw_region(warped, left_fitx, right_fitx)
+    area = draw.draw_area(im, left_fitx, right_fitx, M)
 
     left.append([leftx, lefty])
     right.append([rightx, righty])
@@ -43,19 +51,22 @@ for i in range(len(warped_images)):
     prev_left.append(left_fit)
     prev_right.append(right_fit)
 
+    left_win.append(leftw)
+    right_win.append(rightw)
+
     left_c.append(lc)
     right_c.append(rc)
-    print('lc: ', lc, '|', 'rc: ', rc)
+    # print('lc: ', lc, '|', 'rc: ', rc)
 
-    # title = "Lane of Image " + str(i+1)
-    # plt.imshow(out_img)
-    # plt.title(title)
-    # plt.show()
+    title = "Area of Lanes on Image " + str(i+1)
+    plt.imshow(area)
+    plt.title(title)
+    plt.show()
 
 '''======================================================='''
 # plot images
 
-    # out_img = np.dstack((im, im, im))
+    # out_img = np.dstack((warped, warped, warped))
     # out_img[lefty, leftx] = [255, 0, 0]
     # out_img[righty, rightx] = [0, 0, 255]
     # result.append(out_img)

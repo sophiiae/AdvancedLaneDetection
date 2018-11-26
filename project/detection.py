@@ -2,7 +2,6 @@ import matplotlib.pyplot as plt
 import matplotlib.image as mpimg
 import numpy as np
 import cv2
-import imtool as tool
 
 def find_lane(binary_warped, peak, prev_left=[], prev_right=[]):
     nwindows = 12
@@ -24,7 +23,8 @@ def find_lane(binary_warped, peak, prev_left=[], prev_right=[]):
     # Create empty lists to receive left and right lane pixel indices
     left_lane_inds = []
     right_lane_inds = []
-    windows = []
+    leftw = []
+    rightw = []
     ratio = 0.0
 
     if (len(prev_left) > 0) & (len(prev_right) > 0):
@@ -50,9 +50,9 @@ def find_lane(binary_warped, peak, prev_left=[], prev_right=[]):
             win_xright_high = rightx_current + margin
             
             # Draw the windows on the visualization image
-            windows.append([(win_xleft_low,win_y_low),
+            leftw.append([(win_xleft_low,win_y_low),
             (win_xleft_high,win_y_high)]) 
-            windows.append([(win_xright_low,win_y_low),
+            rightw.append([(win_xright_low,win_y_low),
             (win_xright_high,win_y_high)])
             
             # Identify the nonzero pixels in x and y within the window #
@@ -88,7 +88,7 @@ def find_lane(binary_warped, peak, prev_left=[], prev_right=[]):
     left_fitx = left_fit[0]*ploty**2 + left_fit[1]*ploty + left_fit[2]
     right_fitx = right_fit[0]*ploty**2 + right_fit[1]*ploty + right_fit[2]
 
-    return left_fit, right_fit, left_fitx, right_fitx, leftx, lefty, rightx, righty, ploty
+    return left_fit, right_fit, left_fitx, right_fitx, leftx, lefty, rightx, righty, ploty, leftw, rightw
 
 def compute_curvature(left_fit, right_fit, left_fitx, right_fitx, ploty):
     y_eval = np.max(ploty)
