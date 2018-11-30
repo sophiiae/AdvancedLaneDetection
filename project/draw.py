@@ -12,9 +12,11 @@ def draw_lane(im, left_fitx, right_fitx, leftw, rightw):
     left_pts = np.dstack((left_fitx, ploty)).astype(np.int32)
     right_pts = np.dstack((right_fitx, ploty)).astype(np.int32)
 
+    # draw the curve through detected lane line segments with yellow color
     cv2.polylines(out_img, left_pts, False, (255, 255, 0), 4)
     cv2.polylines(out_img, right_pts, False, (255, 255, 0), 4)
 
+    # draw sliding windows on both lanes with color Cyan
     for low, high in leftw:
         cv2.rectangle(out_img, low, high, (0, 255, 255), 3)
 
@@ -25,7 +27,7 @@ def draw_lane(im, left_fitx, right_fitx, leftw, rightw):
 
 def draw_region(im, left_fitx, right_fitx):
     """ draw lane area on binary warped image """
-    margin = 140
+    margin = 50
     ploty = np.linspace(0, im.shape[0] - 1, im.shape[0])
     
     left_w1 = np.array([np.transpose(np.vstack([left_fitx - margin, ploty]))])
@@ -46,6 +48,7 @@ def draw_region(im, left_fitx, right_fitx):
     return region_img
 
 def draw_area(im, left_fitx, right_fitx, M):
+    """ draw the area between detected left lane and right lane """
     color = np.zeros_like(im)
     ploty = np.linspace(0, im.shape[0] - 1, im.shape[0])
     

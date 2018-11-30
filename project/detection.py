@@ -1,7 +1,4 @@
-import matplotlib.pyplot as plt
-import matplotlib.image as mpimg
 import numpy as np
-import cv2
 
 def find_lane(binary_warped, peak, prev_left=[], prev_right=[]):
     nwindows = 12
