@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 import cv2
 
 # Load our image
-binary_warped = mpimg.imread('warped_example.jpg')
+binary_warped = mpimg.imread('project/images/test/warped_example.jpg')
 
 def find_lane_pixels(binary_warped):
     # Take a histogram of the bottom half of the image
@@ -57,8 +57,10 @@ def find_lane_pixels(binary_warped):
         (win_xright_high,win_y_high),(0,255,0), 2) 
         
         ### TO-DO: Identify the nonzero pixels in x and y within the window ###
-        good_left_inds = None
-        good_right_inds = None
+        good_left_inds = ((nonzeroy >= win_y_low) & (nonzeroy < win_y_high) & 
+        (nonzerox >= win_xleft_low) &  (nonzerox < win_xleft_high)).nonzero()[0]
+        good_right_inds = ((nonzeroy >= win_y_low) & (nonzeroy < win_y_high) & 
+        (nonzerox >= win_xright_low) &  (nonzerox < win_xright_high)).nonzero()[0]
         
         # Append these indices to the lists
         left_lane_inds.append(good_left_inds)
@@ -90,8 +92,8 @@ def fit_polynomial(binary_warped):
     leftx, lefty, rightx, righty, out_img = find_lane_pixels(binary_warped)
 
     ### TO-DO: Fit a second order polynomial to each using `np.polyfit` ###
-    left_fit = None
-    right_fit = None
+    left_fit = np.polyfit(lefty, leftx, 2)
+    right_fit = np.polyfit(righty, rightx, 2)
 
     # Generate x and y values for plotting
     ploty = np.linspace(0, binary_warped.shape[0]-1, binary_warped.shape[0] )

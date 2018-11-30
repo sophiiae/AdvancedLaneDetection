@@ -44,7 +44,7 @@ def color_th(img, th=(0, 255)):
     binary[(img > th[0]) & (img <= th[1])] = 1
     return binary
 
-def sobel_thresh(img, orient,th=10, kernel=15):
+def sobel_thresh(img, orient, th=10, kernel=15):
     """ apply Sobel filter to image with orientation and threshold """
     # calculate derivative in different directions
     sobelx = cv2.Sobel(img, cv2.CV_64F, 1, 0, ksize=kernel)
@@ -83,7 +83,7 @@ def gradient(gray, th=1.5, kernel=15):
     return binary_output
 
 def combine_thresh(color_c, kernel=15):
-    th = (61, 100)
+    th = (68, 100)
     cc = color_th(color_c, th)
     sx = sobel_thresh(color_c,'x', 15)
     sy = sobel_thresh(color_c,'y', 15)

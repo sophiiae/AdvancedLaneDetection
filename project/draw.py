@@ -12,14 +12,14 @@ def draw_lane(im, left_fitx, right_fitx, leftw, rightw):
     left_pts = np.dstack((left_fitx, ploty)).astype(np.int32)
     right_pts = np.dstack((right_fitx, ploty)).astype(np.int32)
 
-    cv2.polylines(out_img, left_pts, False, (138,43,226), 4)
-    cv2.polylines(out_img, right_pts, False, (138,43,226), 4)
+    cv2.polylines(out_img, left_pts, False, (255, 255, 0), 4)
+    cv2.polylines(out_img, right_pts, False, (255, 255, 0), 4)
 
     for low, high in leftw:
-        cv2.rectangle(out_img, low, high, (255, 0, 0), 3)
+        cv2.rectangle(out_img, low, high, (0, 255, 255), 3)
 
     for low, high in rightw:            
-        cv2.rectangle(out_img, low, high, (255, 0, 0), 3)   
+        cv2.rectangle(out_img, low, high, (0, 255, 255), 3)   
 
     return out_img
 
@@ -40,8 +40,8 @@ def draw_region(im, left_fitx, right_fitx):
     region_img = np.dstack((im, im, im)) * 255
 
     # Draw the lane onto the warped blank image
-    cv2.fillPoly(region_img, np.int_([left_pts]), (0, 255, 0))
-    cv2.fillPoly(region_img, np.int_([right_pts]), (0, 255, 0))
+    cv2.fillPoly(region_img, np.int_([left_pts]), color=(255, 0, 255),lineType=4)
+    cv2.fillPoly(region_img, np.int_([right_pts]), color=(255, 0, 255), lineType=4)
 
     return region_img
 
@@ -59,7 +59,5 @@ def draw_area(im, left_fitx, right_fitx, M):
     newwarp = cv2.warpPerspective(color, M, (im.shape[1], im.shape[0]), flags=cv2.WARP_INVERSE_MAP)
 
     result = cv2.addWeighted(im, 1, newwarp, 0.3, 0)
-    return result
-
     return result
     

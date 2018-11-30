@@ -33,7 +33,7 @@ def find_lane(binary_warped, peak, prev_left=[], prev_right=[]):
         right_lane_inds = ((nonzerox > (prev_right[0]*(nonzeroy**2) + prev_right[1]*nonzeroy +  prev_right[2] - margin)) & (nonzerox < (prev_right[0]*(nonzeroy**2) + prev_right[1]*nonzeroy + prev_right[2] + margin)))
 
         ratio = (np.sum(left_lane_inds) + np.sum(right_lane_inds)) / total_nonzeros
-    
+
     if ratio < 0.8: 
         left_lane_inds = []
         right_lane_inds = []
@@ -88,7 +88,9 @@ def find_lane(binary_warped, peak, prev_left=[], prev_right=[]):
     left_fitx = left_fit[0]*ploty**2 + left_fit[1]*ploty + left_fit[2]
     right_fitx = right_fit[0]*ploty**2 + right_fit[1]*ploty + right_fit[2]
 
-    return left_fit, right_fit, left_fitx, right_fitx, leftx, lefty, rightx, righty, ploty, leftw, rightw
+    left_pts = [lefty, leftx]
+    right_pts = [righty, rightx]
+    return left_fit, right_fit, left_fitx, right_fitx, ploty,left_pts, right_pts, leftw, rightw
 
 def compute_curvature(left_fit, right_fit, left_fitx, right_fitx, ploty):
     y_eval = np.max(ploty)
