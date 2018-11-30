@@ -1,4 +1,5 @@
 import numpy as np
+import matplotlib.pyplot as plt
 import cv2
 
 def lab(im):
@@ -106,7 +107,7 @@ def hist_peak(img):
   
     hist = np.sum(half, axis=0)
 
-    leftb = argmax(hist[:mid])
-    rightb = argmax(hist[mid:]) + mid
+    leftp = argmax(hist[:mid])
+    rightp = argmax(hist[mid:]) + mid
 
-    return leftb, rightb
+    return leftp, rightp
