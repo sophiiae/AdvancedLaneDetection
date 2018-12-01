@@ -39,15 +39,20 @@ def run_set(dir_in, image_format='png'):
         plt.close()
 
         binary_out = dir_out + "/" + str(i+1) + "_binary.png"
-        plt.imsave(binary_out, binary_img[i])
+        plt.imsave(binary_out, binary_img[i], cmap='gray')
+
         warped_out = dir_out + "/" + str(i+1) + "_warped.png"
-        plt.imsave(warped_out, warped_images[i])
+        plt.imsave(warped_out, warped_images[i], cmap='gray')
+
         area_out = dir_out + "/" + str(i+1) + "_area.png"
         plt.imsave(area_out,area)
+
         lane_out = dir_out + "/" + str(i+1) + "_lane.png"
         plt.imsave(lane_out,lane)
+
         region_out = dir_out + "/" + str(i+1) + "_region.png"
         plt.imsave(region_out,region)
+
         print(" *** Images Processed: " + str(i+1) + " *** ")
 
     print("** ---- done ---- **")

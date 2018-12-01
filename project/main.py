@@ -9,8 +9,8 @@ import run
 dir = 'project/images/test/'
 run.run_set(dir)  
 
-im = mpimg.imread(dir + 'ROAD2_0157.png')
+# im = mpimg.imread(dir + 'ROAD2_0157.png')
 # run.run_single(im)
 
-vid_dir = 'project/images/'
-vid_name = 'test1.mp4'
+# vid_dir = 'project/images/'
+# vid_name = 'test1.mp4'

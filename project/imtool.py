@@ -110,4 +110,11 @@ def hist_peak(img):
     leftp = argmax(hist[:mid])
     rightp = argmax(hist[mid:]) + mid
 
+    while (rightp - leftp) < 500:
+        if leftp > mid - 300: 
+            mid = mid - 300
+        if rightp < mid - 300: 
+            mid = mid + 300
+        leftp = argmax(hist[:mid])
+        rightp = argmax(hist[mid:]) + mid
     return leftp, rightp
