@@ -6,7 +6,7 @@ from moviepy.editor import VideoFileClip
 import run
 
 # run lane detection on image folder
-dir = 'project/images/test/'
+dir = 'project/images/r1/'
 run.run_set(dir)  
 
 # im = mpimg.imread(dir + 'ROAD2_0157.png')
