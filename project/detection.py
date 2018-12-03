@@ -1,10 +1,11 @@
 import numpy as np
 
 def find_lane(binary_warped, peak, prev_left=[], prev_right=[]):
+    # HYPERPARAMETERS
     nwindows = 12
     margin = 140
     minpix = 70
-
+    # Set height of windows
     window_height = np.int(binary_warped.shape[0]//nwindows)
 
     # Identify the x and y positions of all nonzero pixels in the image
@@ -18,18 +19,19 @@ def find_lane(binary_warped, peak, prev_left=[], prev_right=[]):
     rightx_current = peak[1] 
 
     # Create empty lists to receive left and right lane pixel indices
-    left_lane_inds = []
-    right_lane_inds = []
     leftw = []
     rightw = []
     ratio = 0.0
 
-    if (len(prev_left) > 0) & (len(prev_right) > 0):
+    if (len(prev_left) > 0) and (len(prev_right) > 0):
+        ### Set the area of search based on activated x-values ###
+        ### within the +/- margin of our polynomial function ###
         left_lane_inds = ((nonzerox > (prev_left[0]*(nonzeroy**2) + prev_left[1]*nonzeroy +  prev_left[2] - margin)) & (nonzerox < (prev_left[0]*(nonzeroy**2) + prev_left[1]*nonzeroy + prev_left[2] + margin)))
 
         right_lane_inds = ((nonzerox > (prev_right[0]*(nonzeroy**2) + prev_right[1]*nonzeroy +  prev_right[2] - margin)) & (nonzerox < (prev_right[0]*(nonzeroy**2) + prev_right[1]*nonzeroy + prev_right[2] + margin)))
 
         ratio = (np.sum(left_lane_inds) + np.sum(right_lane_inds)) / total_nonzeros
+        print("** --- Previous lane found --- **")
 
     if ratio < 0.8: 
         left_lane_inds = []
@@ -46,7 +48,7 @@ def find_lane(binary_warped, peak, prev_left=[], prev_right=[]):
             win_xright_low = rightx_current - margin
             win_xright_high = rightx_current + margin
             
-            # Draw the windows on the visualization image
+            # Add the windows to the list
             leftw.append([(win_xleft_low,win_y_low),
             (win_xleft_high,win_y_high)]) 
             rightw.append([(win_xright_low,win_y_low),
@@ -72,6 +74,11 @@ def find_lane(binary_warped, peak, prev_left=[], prev_right=[]):
         left_lane_inds = np.concatenate(left_lane_inds)
         right_lane_inds = np.concatenate(right_lane_inds)
 
+        found_left = np.sum(left_lane_inds)
+        found_right = np.sum(right_lane_inds)
+        ratio = (found_left + found_right) / total_nonzeros
+        print("*** >> Sliding windows found: " + str(ratio))
+
     # Extract left and right line pixel positions
     leftx = nonzerox[left_lane_inds]
     lefty = nonzeroy[left_lane_inds] 
@@ -87,6 +94,7 @@ def find_lane(binary_warped, peak, prev_left=[], prev_right=[]):
 
     left_pts = [lefty, leftx]
     right_pts = [righty, rightx]
+
     return left_fit, right_fit, left_fitx, right_fitx, ploty,left_pts, right_pts, leftw, rightw
 
 def compute_curvature(left_fit, right_fit, left_fitx, right_fitx, ploty):

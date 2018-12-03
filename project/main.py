@@ -1,16 +1,20 @@
 import matplotlib.pyplot as plt
 import matplotlib.image as mpimg
 import cv2
-from moviepy.video.io.ffmpeg_tools import ffmpeg_extract_subclip
-from moviepy.editor import VideoFileClip
 import run
+import processIMG as process
+
+prev_left = []
+prev_right = []
+
+def process_image(image):
+    global prev_left
+    global prev_right
+    area, lane, region, left_fit, right_fit = process.processIMG(image,prev_left, prev_right)
+    prev_left = left_fit
+    prev_right = right_fit
+    return area
 
 # run lane detection on image folder
-dir = 'project/images/r1/'
-run.run_set(dir)  
-
-# im = mpimg.imread(dir + 'ROAD2_0157.png')
-# run.run_single(im)
-
-# vid_dir = 'project/images/'
-# vid_name = 'test1.mp4'
+dir = 'project/images/imgs/' 
+run.run_set(dir,1)

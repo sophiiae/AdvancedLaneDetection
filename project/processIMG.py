@@ -28,11 +28,12 @@ def processIMG_set(im, warped, peak, prev_left, prev_right, M):
     left_c.append(lc)
     right_c.append(rc)
 
-    return area, lane, region
+    return area, lane, region, left_fit, right_fit
 
-def processIMG(im):
+
+def processIMG(im, prev_left=[], prev_right=[]):
     warped, peak, M = init.find_lane(im)
-    left_fit, right_fit, left_fitx, right_fitx, ploty, left_pts, right_pts,leftw, rightw = dt.find_lane(warped, peak, [], [])
+    left_fit, right_fit, left_fitx, right_fitx, ploty, left_pts, right_pts,leftw, rightw = dt.find_lane(warped, peak, prev_left, prev_right)
 
     lc, rc = dt.compute_curvature(left_fit, right_fit, left_fitx, right_fitx, ploty)
 
@@ -44,4 +45,4 @@ def processIMG(im):
     lane[left_pts] = [255, 0, 0]
     lane[right_pts] = [0, 0, 255]
 
-    return area, lane, region
+    return area, lane, region, left_fit, right_fit
