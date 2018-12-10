@@ -12,6 +12,7 @@ def lab(im):
     return [l, a, b]
 
 def ROI(img):
+    """ defind region of imterest and apply mask """
     h = img.shape[0]
     w = img.shape[1]
     pts = np.array([[w/2, h/2+50], [0, h], [w, h]], dtype=np.int32)
@@ -26,6 +27,7 @@ def perspective_transform(src, dst):
     return M
 
 def warp(im, src, dst):
+    """ perspective transform """
     out_img = np.zeros_like(im) # for binary image
     # out_img = np.dstack((im, im, im))*255 # for RGB image
     size = (im.shape[1], im.shape[0])
@@ -67,6 +69,7 @@ def sobel_thresh(img, orient, th=10, kernel=15):
     return binary
 
 def gradient(gray, th=1.5, kernel=15):
+    """ calculate gradiant magnitude """
     sobelx = cv2.Sobel(gray, cv2.CV_64F, 1, 0, ksize=kernel)
     sobely = cv2.Sobel(gray, cv2.CV_64F, 0, 1, ksize=kernel)
 
@@ -93,7 +96,7 @@ def combine_thresh(color_c, kernel=15):
     # get best fit result from sobel and color filters
     combined[(cc == 0) & (combined == 1)] = 0
     combined[(cc == 1) & (combined == 0)] = 1
-    return ROI(combined)
+    return ROI(combined), combined
 
 def argmax(h):
     start = np.argmax(h)
@@ -101,6 +104,7 @@ def argmax(h):
     return int((start + end)/2)
 
 def hist_peak(img):
+    """ detect histogram peaks """
     [h, w] = img.shape[:2]
     mid = int(w/2)
     half = img[int(h/2):,:]

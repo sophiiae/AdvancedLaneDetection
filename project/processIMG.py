@@ -28,7 +28,7 @@ def processIMG_set(im, warped, peak, prev_left, prev_right, M):
     left_c.append(lc)
     right_c.append(rc)
 
-    return area, lane, region, left_fit, right_fit
+    return area, lane, region, left_fit, right_fit, left_c, right_c
 
 
 def processIMG(im, prev_left=[], prev_right=[]):

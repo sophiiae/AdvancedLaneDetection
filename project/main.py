@@ -16,5 +16,5 @@ def process_image(image):
     return area
 
 # run lane detection on image folder
-dir = 'project/images/imgs/' 
+dir = 'project/images/test/' 
 run.run_set(dir,1)
