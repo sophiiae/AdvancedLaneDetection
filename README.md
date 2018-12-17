@@ -21,7 +21,7 @@ All project files are under project folder, the practice fold contains practice 
 
 ## Lane Mark Extention 
  Given an image in RGB color space, it first converts to LAB color space. 
-    - Modify `imtool` to get best result for your own dataset.
+- Modify `imtool` to get best result for your own dataset.
 
 ![lab](readmeimg/lab.png)
 
