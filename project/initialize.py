@@ -22,6 +22,7 @@ def find_lane_set(input):
         binary_roi, binary = tool.combine_thresh(l)
         binary_roi_img.append(binary_roi)
         binary_img.append(binary)
+        # plot4(images[0], l, a, b)
 
     # warp images
     warped_images = []
@@ -55,3 +56,23 @@ def plot(a, m=None, t=''):
     plt.imshow(a, cmap=m)
     plt.title(t)
     plt.show()
+
+def plot4(a, b, c, d):
+    plt.figure(figsize=(10, 8))
+
+    plt.subplot(221)
+    plt.imshow(a)
+    plt.title('Original Image')
+
+    plt.subplot(222)
+    plt.imshow(b, cmap='gray')
+    plt.title('L Channel')
+    
+    plt.subplot(223)
+    plt.imshow(c, cmap='gray')
+    plt.title('A Channel')
+
+    plt.subplot(224)
+    plt.imshow(d, cmap='gray')
+    plt.title('B Channel')
+    plt.show() 

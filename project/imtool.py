@@ -23,7 +23,6 @@ def ROI(img):
 def perspective_transform(src, dst):
     """compute perspective transform matrix and inverse matrix """
     M = cv2.getPerspectiveTransform(src, dst)
-    # M_inv = cv2.getPerspectiveTransform(dst, src)
     return M
 
 def warp(im, src, dst):

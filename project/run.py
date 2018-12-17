@@ -48,14 +48,14 @@ def run_set(dir_in, save=0, image_format='png'):
  
             binary_roi_out = dir_out + "/" + num + "_binary_roi.eps"
             bi = plt.imshow(binary_roi_img[i], cmap='gray')
-            plt.title("Binary Image with Canny Filter and color threshold")
+            plt.title("Binary Image with ROI mask ")
             # plt.imsave(binary_roi_out, binary_roi_img[i], cmap='gray')
             plt.savefig(binary_roi_out)
             plt.close()
 
             binary_out = dir_out + "/" + num + "_binary.eps"
             bi = plt.imshow(binary_img[i], cmap='gray')
-            plt.title("Binary Image with ROI mask")
+            plt.title("Binary Image with Sobel Filter and color threshold")
             # plt.imsave(binary_out, binary_img[i], cmap='gray')
             plt.savefig(binary_out)
             plt.close()

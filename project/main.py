@@ -3,6 +3,9 @@ import matplotlib.image as mpimg
 import cv2
 import run
 import processIMG as process
+import time
+
+start = time.time()
 
 prev_left = []
 prev_right = []
@@ -17,4 +20,7 @@ def process_image(image):
 
 # run lane detection on image folder
 dir = 'project/images/test/' 
-run.run_set(dir,1)
+run.run_set(dir)
+
+end = time.time()
+print('Run time: ', end - start)
