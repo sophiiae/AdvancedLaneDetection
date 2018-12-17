@@ -3,7 +3,7 @@
    Detecting and localizing lanes from a road image is an important component of intelligent transportation system applications. Intelligent vehicles are expected to be able to follow the lane direction to ensure the safety of both passengers and pedestrians. <br/>
    The following image shows the flow diagram of the algorithm: 
     
-![flow](https://i.ibb.co/4m6Sv0V/flow.png)
+![flow](readmeimg/flow.png)
 
 #### OS
 - The algorithm was developed under MacOS.  
@@ -23,28 +23,28 @@ All project files are under project folder, the practice fold contains practice 
  Given an image in RGB color space, it first converts to LAB color space. 
     - Modify `imtool` to get best result for your own dataset.
 
-![enter image description here](https://i.ibb.co/xGYDnt9/lab.png)
+![lab](readmeimg/lab.png)
 
 It will apply Sobel lter in both x-axis and y-axis to the L channel image, then use the combination of color and gradient thresholds to obtain a magnitude-based and direction-based binary image where the lane lines are clearly visible.
 
-![binary](https://i.ibb.co/X4HdZFF/bi.png)
+![binary](readmeimg/bi.png)
 
 ## Lane Position Determination
 Pick four points in a trapezoidal shape lying along the lines that would represent a rectangle when looking down on the road from above. Apply perspective transform by using the warpPerspective function in OpenCV to generate the rectified binary image with "birds-eye view". The white pixels on the image potentially belong to the lane marks. Peak detection function takes the lower half of the warped binary image, the highest points of the accumulated values in each side are potential starting points to detect lane marks.
 
-![histogram](https://i.ibb.co/tzWyd2P/hist.png)
+![histogram](readmeimg/hist.png)
 
 ## Lane Mark Recognition
 The sliding window detection function begins tracing lanes in the binary images with series of left and right "windows" moving upwards. The search windows start from the peaks detected in the histogram. If the pixels in a search window is beyond the threshold value, the window will be re-centered to the mean position. Since the frames are continuous, the previous lane position can be used as a reference to improve the efficiency of the sliding windows detection. After the window sliding search, a list of left and right pixel locations are collected.
 
-![slidingwindows](https://i.ibb.co/cLFSPz1/lane.png)
+![slidingwindows](readmeimg/lane.png)
 
 Fit a quadratic equation to all the pixels by using polyfit function in NumPy. Detected lane can overlay on the original image by using the inverse matrix of the perspective transform to visualize the algorithm result. 
 
-![result](https://i.ibb.co/pPyZx7W/result.png)
+![result](readmeimg/result.png)
 
 ## Results
-![enter image description here](https://i.ibb.co/YXFsRmv/more.png)
+![enter image description here](readmeimg/more.png)
 The run time of processing single frame is 1.24 seconds.
 
 ## Conclusion
