@@ -11,13 +11,13 @@
 #### Brief file description
 All project files are under project folder, the practice fold contains practice files that may not been used in project, such as camera calibration. 
 - `main.py` shows the example code for using the algorithm
-- `run.py` invoke corresponding process for the input
-- `processIMG.py` perform lane detection algorithm for either image sets or single image input 
+- `run.py` invokes corresponding process for the input
+- `processIMG.py` performs lane detection algorithm for either image sets or single image input 
 - `initialize.py` generates parameters from either image sets or single image for later use in the algorithm
 - `imtool.py` includes functions for filtering image, perspective transformation and histogram calculation 
 - `detection.py` finds the lane marks with sliding windows method and calculates the radius of curvature. 
-- `draw.py` draw detected lane mark, area or region on original image. (Visualization)
-- `frame2vid.py` convert frames to video 
+- `draw.py` draws detected lane mark, area or region on original image. (Visualization)
+- `frame2vid.py` converts frames to video 
 
 ## Lane Mark Extention 
  Given an image in RGB color space, it first converts to LAB color space. 
