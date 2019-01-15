@@ -17,7 +17,6 @@ All project files are under project folder, the practice fold contains practice 
 - `imtool.py` includes functions for filtering image, perspective transformation and histogram calculation 
 - `detection.py` finds the lane marks with sliding windows method and calculates the radius of curvature. 
 - `draw.py` draws detected lane mark, area or region on original image. (Visualization)
-- `frame2vid.py` converts frames to video 
 
 ## Lane Mark Extention 
  Given an image in RGB color space, it first converts to LAB color space. 
