@@ -24,7 +24,7 @@ All project files are under project folder, the practice fold contains practice 
 
 ![lab](readmeimg/lab.png)
 
-It will apply Sobel lter in both x-axis and y-axis to the L channel image, then use the combination of color and gradient thresholds to obtain a magnitude-based and direction-based binary image where the lane lines are clearly visible.
+It will apply Sobel Filter in both x-axis and y-axis to the L channel image, then use the combination of color and gradient thresholds to obtain a magnitude-based and direction-based binary image where the lane lines are clearly visible.
 
 ![binary](readmeimg/bi.png)
 
