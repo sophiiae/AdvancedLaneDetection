@@ -18,7 +18,7 @@ All project files are under project folder, the practice fold contains practice 
 - `detection.py` finds the lane marks with sliding windows method and calculates the radius of curvature. 
 - `draw.py` draws detected lane mark, area or region on original image. (Visualization)
 
-## Lane Mark Extention 
+## Lane Mark Extraction 
  Given an image in RGB color space, it first converts to LAB color space. 
 - Modify `imtool` to get best result for your own dataset.
 
